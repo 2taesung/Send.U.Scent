@@ -1,21 +1,18 @@
 <template>
   <div class="home">
-  <MainSlider />
-  <BestSlider />
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import MainSlider from '@/components/Main/MainSlider.vue'
-import BestSlider from '@/components/Main/BestSlider.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "Home",
   components: {
-    MainSlider,
-    BestSlider,
-  
+    HelloWorld,
   },
 };
 </script>

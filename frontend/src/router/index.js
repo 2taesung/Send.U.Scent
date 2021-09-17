@@ -24,9 +24,6 @@ import WantList from "../views/Mypage/WantList.vue"
 // 에러 페이지
 import Page404 from "../views/404.vue"
 
-// User 메뉴
-import SignUp from "../components/user/SignUpForm.vue"
-
 const routes = [
   {
     path: "/",
@@ -44,32 +41,32 @@ const routes = [
     component: RecAll,
     children: [
       {
-        path: 'perfume',
+        path: '/perfume',
         name: 'Perfume',
         component: RecPerfume,
       },
       {
-        path: 'softener',
+        path: '/softener',
         name: 'Softener',
         component: RecSoftener,
       },
       {
-        path: 'detail/:id',
+        path: '/detail/:id',
         name: 'RecDetail',
         component: RecDetail,
       },
       {
-        path: 'test',
+        path: '/test',
         name: 'Test',
         component: TestMain,
       },
       {
-        path: 'testQnA',
+        path: '/testQnA',
         name: 'TestQna',
         component: TestQna,
       },
       {
-        path: 'testResult',
+        path: '/testResult',
         name: 'TestResult',
         component: TestResult,
       },
@@ -88,13 +85,13 @@ const routes = [
       },
       {
         // 공지사항 글쓰기
-        path: 'write',
+        path: '/write',
         name: 'NoticeWrite',
         component: BoardWrite,
       },
       {
         // 공지사항 글 수정
-        path: 'modify/:id',
+        path: '/modify/:id',
         name: 'NoticeModify',
         component: BoardWrite,
       },
@@ -113,19 +110,19 @@ const routes = [
       },
       {
         // 문의하기 글쓰기
-        path: 'write',
+        path: '/write',
         name: 'QnaWrite',
         component: BoardWrite,
       },
       {
         // 문의하기 글 수정
-        path: 'modify/:id',
+        path: '/modify/:id',
         name: 'QnaModify',
         component: BoardWrite,
       },
       {
         // 문의하기 답글 수정
-        path: 'modify/answer/:id',
+        path: '/modify/answer/:id',
         name: 'QnaAnsModify',
         component: BoardWrite,
       },
@@ -137,12 +134,12 @@ const routes = [
     component: Mypage,
     children: [
       {
-        path: 'havelist',
+        path: '/havelist',
         name: 'HaveList',
         component: HaveList,
       },
       {
-        path: 'wantlist',
+        path: '/wantlist',
         name: 'WantList',
         component: WantList,
       },
@@ -156,11 +153,6 @@ const routes = [
   {
     path: '/:catchAll(.*)', // vue3 사용자 정의 정규표현식 매개변수 사용
     redirect: '/404'
-  },
-  {
-    path: "/signup",
-    name: "Signup",
-    component: SignUp,
   },
 ];
 

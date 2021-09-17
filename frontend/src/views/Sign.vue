@@ -1,6 +1,6 @@
-// 가지고 있는 리스트 페이지
+// Login 또는 SignUp(회원가입) 페이지
 <template>
-    <div id="HaveListRoot">
+    <div id="SignRoot">
 
     </div>
 </template>
