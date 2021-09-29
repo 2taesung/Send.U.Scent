@@ -47,7 +47,7 @@
                         <div>
                             <input
                             v-model="password_chk"
-                            type="text"
+                            type="password"
                             />
                         </div>
                         <br>
@@ -60,12 +60,6 @@
                                 회원가입
                             </button>
                         </div>
-
-                        <!-- <div class="sns-login">
-                            <img src="https://me2.kr/0wmie" alt="google" />
-                            <img src="https://me2.kr/rh1k0" alt="naver" />
-                            <img src="https://me2.kr/vxczh" alt="kakao" />
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -75,16 +69,20 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 export default {
   data() {
     return {
-      id: null,
+      user_id: null,
       nickname: null,
       password: null,
       password_chk: null,
-    };
+    }
   },
-};
+  methods: {
+      ...mapActions('user', ["signup"])
+  },
+}
 </script>
 
 <style lang="scss" scoped>
