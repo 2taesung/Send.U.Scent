@@ -1,12 +1,11 @@
 import axios from "axios"
 
 export default {
-  namespaced: true,
+//   namespaced: true,
   // data
   state:{
-    userInfo: null,
     isLogin: false,
-    email: null,
+    user_id: null,
     isLoginError: false
   },
   // 변이 : state값 변경은 여기서만 가능
@@ -29,6 +28,7 @@ export default {
   // 실행할 때 .dispatch() 메소드 사용
   // context : state 데이터 접근, payload : 입력받은 값의 매개변수
   actions: {
+    
     // 로그인 시도
     login({dispatch}, loginObj) {
       // 로그인 -> 토큰반환
@@ -51,36 +51,25 @@ export default {
           alert('이메일과 비밀번호를 확인하세요.')
         })
     },
-    getMemberInfo({ commit }) {
-      // 로컬 스토리지에 저장되어 있는 토큰을 불러온다.
-      let token = localStorage.getItem("access_token")
-      let user_id = localStorage.getItem("user_id")
-      let config = {
-        headers: {
-          "access-token": token
-        }
-      }
-      // 토큰 -> 멤버 정보를 반환
-      // 새로 고침 -> 토큰만 가지고 멤버정보를 요청
 
-    },
     signup({dispatch}, signupObj) {
-      axios
-        .post('http://localhost:8888/api/users/add', signupObj)
-        .then(res => {
-          let user_id = res.data.user_id
-          let nickname = res.data.nickname
-          let password = res.data.password
-          let loginObj = {
-            user_id: user_id,
-            nickname: nickname,
-            password: password
-          }
-          console.log('회원가입 완료')
-          dispatch('login', loginObj)
-        })
-        .catch(() => {
-          alert('다시 입력해주세요!')
+        console.log('하이')
+        axios
+            .post('http://localhost:8888/api/users/add', signupObj)
+            .then(res => {
+            let user_id = res.data.user_id
+            let nickname = res.data.nickname
+            let password = res.data.password
+            let loginObj = {
+                user_id: user_id,
+                nickname: nickname,
+                password: password
+            }
+            console.log('회원가입 완료')
+            dispatch('login', loginObj)
+            })
+            .catch(() => {
+            alert('다시 입력해주세요!')
         })
     },
   }

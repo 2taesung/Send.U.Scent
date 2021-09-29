@@ -54,7 +54,7 @@
                         <div class="button-div">
                             <button
                                 class="btn btn-color"
-                                @click="signup({ email, password, nickname, introduce })"
+                                @click="signup({ user_id, nickname, password })"
                                 :disabled="loading"
                             >
                                 회원가입
@@ -80,7 +80,10 @@ export default {
     }
   },
   methods: {
-      ...mapActions('user', ["signup"])
+    //   signup() {
+    //       console.log('click')
+    //   }
+      ...mapActions(["signup"])
   },
 }
 </script>
