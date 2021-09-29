@@ -2,6 +2,7 @@
 node_modules
 /dist
 
+*node_modules/*
 
 # local env files
 .env.local
@@ -23,3 +24,4 @@ pnpm-debug.log*
 *.sw?
 
 /backend
+
