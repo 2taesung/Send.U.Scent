@@ -15,7 +15,7 @@
                         </div>
                         <div>
                             <input
-                            v-model="id"
+                            v-model="user_id"
                             type="text"
                             />
                         </div>
@@ -73,10 +73,10 @@ import { mapActions } from "vuex"
 export default {
   data() {
     return {
-      user_id: null,
-      nickname: null,
-      password: null,
-      password_chk: null,
+        user_id: null,
+        nickname: null,
+        password: null,
+        password_chk: null,
     }
   },
   methods: {

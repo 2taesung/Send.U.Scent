@@ -4,7 +4,8 @@ const express = require("express");
 //express 사용
 const app = express();
 
-var mysql      = require('mysql');
+
+var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'J5C204.p.ssafy.io', 
     port: '3306', 
@@ -85,7 +86,7 @@ app.get("/api/users/user", (req, res) => {
         let user_id = req.query.user_id
         console.log(user_id)
         console.log(rows)
-        // const user = rows.filter(data => data.user_id == user_id);
+        const user = rows.filter(data => data.user_id == user_id);
         // console.log('login is : ', user);
         res.send(user);
     });
@@ -110,40 +111,71 @@ app.get("/api/users/user", (req, res) => {
  *  경로가 /users/1 이거나 /users/2 이거 일때 둘다 라우터를 거치게 된다.
  *  그렇기 때문에 다른 라우터 보다 아래 있어야 한다.
  */
-app.get("/api/login", (req, res) => {
-    var user_id = req.body.user_id;
-    var password = req.body.password;
-    connection.query('SELECT * FROM user WHERE user_id = ?', [user_id],
-    function( error, results, fields) {
-        if (error) {
-            // console.log("error ocurred", error);
+app.post("/api/login/", (req, res) => {
+    console.log('login')
+    console.log(req)
+    console.log(req.body)
+    console.log(req.body.user_id)
+    connection.query('SELECT * FROM user', function(err, rows) {
+        if(err) throw err;
+        console.log('res')
+        connection.query('SELECT * FROM user WHERE user_id = ? AND password = ?', [req.body.user_id, req.body.password], function(error, results, fields) {
+
+            console.log('The solution is: ', results);
+            
             res.send({
-                "code": 400,
-                "failed": "error ocurred"
-            })
-        } else {
-            // console.log('The solution is: ', results);
-            if(results.length > 0) {
-                if(results[0].password == password) {
-                    res.send({
-                        "code": 200,
-                        "success": "login sucessfull"
-                    });
-                } else {
-                    res.send({
-                        "code": 204,
-                        "success": "Email and password does not match"
-                    });
-                }
-            } else {
-                res.send({
-                    "code":204,
-                    "success": "Email does not exists"
-                });
-            }
-        }    
-    }) 
+                "code": 200,
+                // "user_id": results[0].user_id,
+                "success": "user login sucessfully"
+            });
+        })
+    })
 })
+    
+
+        // console.log(req)
+        // // console.log(req.)
+        // console.log(req.body)
+        // console.log(req.body.user_id)
+        // var user_id = req.body.user_id
+        // let a = user_id
+        // console.log(user_id)
+        
+        // var password = req.body.password;
+        // connection.query('SELECT * FROM user WHERE user_id="qq"',
+        // function( error, results) {
+        //     if (error) {
+        //         // console.log("error ocurred", error);
+        //         res.send({
+        //             "code": 400,
+        //             "failed": "error ocurred"
+        //         })
+        //     } else {
+        //         console.log('The solution is: ', results);
+        //         if(results.length > 0) {
+        //             if(results[0].password == password) {
+        //                 res.send({
+        //                     "code": 200,
+        //                     "user_id": user_id,
+        //                     "success": "login sucessfull"
+        //                 });
+        //             } else {
+        //                 res.send({
+        //                     "code": 204,
+        //                     "user_id": user_id,
+        //                     "success": "아이디나 비번이 틀리다"
+        //                 });
+        //             }
+        //         } else {
+        //             res.send({
+        //                 "code":204,
+        //                 "user_id": a,
+        //                 "success": "아이디가 없다"
+        //             });
+        //         }
+        //     }    
+        // }) 
+    
 
 
 
@@ -166,6 +198,7 @@ app.post("/api/users/add", (req, res) => {
         "nickname": req.body.nickname,
         "password": req.body.password
     }
+    console.log('person')
     console.log(person)
     
     connection.query(`INSERT INTO user(user_id, nickname, password) VALUES("${req.body.user_id}", "${req.body.nickname}", "${req.body.password}")`, function (error, results, fields) {
@@ -176,13 +209,21 @@ app.post("/api/users/add", (req, res) => {
                 "failed": "error ocurred"
             })
         } else {
-            console.log('The solution is: ', results);
-            res.send({
-                "code": 200,
-                "success": "user registered sucessfully"
-            });
+            console.log(req.body.user_id)
+            connection.query('SELECT * FROM user WHERE user_id = ?', [req.body.user_id], function(error, results, fields) {
+
+                console.log('The solution is: ', results);
+                
+                res.send({
+                    "code": 200,
+                    "user_id": results[0].user_id,
+                    "password": results[0].password,
+                    "nickname": results[0].nickname,
+                    "success": "user registered sucessfully"
+                });
+            })
         }
-    });    
+    })    
 })
 
 

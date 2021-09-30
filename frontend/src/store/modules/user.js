@@ -1,4 +1,5 @@
 import axios from "axios"
+import router from "../../router/index"
 
 export default {
 //   namespaced: true,
@@ -31,42 +32,55 @@ export default {
     
     // 로그인 시도
     login({dispatch}, loginObj) {
+        // console.log(a)
       // 로그인 -> 토큰반환
-      console.log(loginObj)
-      axios
-        .post("http://localhost:8888/api/login", loginObj) // user_id, password
-        .then(res => {
-          // 성공 시 token이 돌아옴.
-          // 토큰을 헤더에 포함시켜서 유저정보를 요청
-          let token = res.data.token
-          let user_id = res.data.user_id
-          // 토큰을 로컬 스토리지에 저장
-          localStorage.setItem("access_token", token) // key - value
-          localStorage.setItem("user_id", user_id)
-        //   dispatch("getMemberInfo")
-          console.log('로그인 완료')
-        })
-        // 로그인 실패했을 때.
-        .catch(() => {
-          alert('이메일과 비밀번호를 확인하세요.')
-        })
+        console.log('로그인오브젝트')
+        console.log(loginObj)
+        
+        axios
+            .post('http://localhost:8888/api/login/', loginObj) // user_id, password
+            .then(res => {
+                console.log('res')
+                console.log(res)
+                console.log(res.data)
+                let user_id = res.data.user_id
+                
+                // this.$state.isLogin = true
+                // this.$state.isLoginError = false
+                // this.$state.user_id = user_id
+                // 토큰을 로컬 스토리지에 저장
+                //   localStorage.setItem("access_token", token) // key - value
+                localStorage.setItem("user_id", user_id)
+                //   dispatch("getMemberInfo")
+                console.log('로그인 완료')
+            //   res.commit('loginSuccess')
+                router.push({ name: "Home" })
+            })
+            // 로그인 실패했을 때.
+            .catch(() => {
+                alert('아이디과 비밀번호를 확인하세요.')
+            })
     },
 
     signup({dispatch}, signupObj) {
         console.log('하이')
+        console.log(signupObj)
         axios
             .post('http://localhost:8888/api/users/add', signupObj)
             .then(res => {
-            let user_id = res.data.user_id
-            let nickname = res.data.nickname
-            let password = res.data.password
-            let loginObj = {
-                user_id: user_id,
-                nickname: nickname,
-                password: password
-            }
-            console.log('회원가입 완료')
-            dispatch('login', loginObj)
+                console.log(res)
+                // let user_id = res.data.user_id
+                // let nickname = res.data.nickname
+                // let password = res.data.password
+                // let loginObj = {
+                //     user_id: user_id,
+                //     nickname: nickname,
+                //     password: password
+                // }
+                // console.log(loginObj)
+                console.log('회원가입 완료')
+                router.push({ name: "Login" })
+                // dispatch('login', loginObj)
             })
             .catch(() => {
             alert('다시 입력해주세요!')

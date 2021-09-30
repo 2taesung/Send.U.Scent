@@ -16,9 +16,7 @@
                     
                     <div>
                         <input
-                        v-model="id"
-                        id="id"
-                        
+                        v-model="user_id"
                         type="text"
                         />
                     </div>
@@ -30,15 +28,13 @@
                     <div>
                         <input
                         v-model="password"
-                        id="password"
-                        
                         type="password"
                         />
                     </div>
                     
                     <br>
                     <div class="button-div">
-                        <button class="btn btn-color" @click="login({ id, password })">
+                        <button class="btn btn-color" @click="login({ user_id, password })">
                             로그인
                         </button>
                     <!-- <button class="btn btn-color">
@@ -60,18 +56,21 @@
 </template>
 
 <script>
+
+import { mapState, mapActions } from "vuex"
 export default {
-  data() {
-    return {
-      id: null,
-      password: null,
-    };
-  },
-  methods: {
-    toSignup() {
-      this.$router.push("/signup");
+    data() {
+        return {
+            user_id: null,
+            password: null,
+        };
     },
-  },
+    computed: {
+    ...mapState(["isLogin", "isLoginError"])
+    },
+    methods: {
+        ...mapActions(["login"]),
+    },
 };
 </script>
 
@@ -108,6 +107,13 @@ export default {
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+                input {
+                    background-color: #F4F6F6;
+                    border-radius: 10px;
+                    border: 0;
+                    outline: 0;
+                    width: 380px;
+                }
                 }
             
             #password,
