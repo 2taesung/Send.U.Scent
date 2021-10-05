@@ -13,16 +13,16 @@
             <div class="filter">
               <label class="title">|계절별</label>
               <div class="filter-check">
-                <input type="checkbox" value="spring" onClick="setCheckBoxAsRadio(season, this);" v-model="season" />
+                <input type="checkbox" value="spring"  v-model="season" />
                 <label for="spring">봄</label>
                 <br />
-                <input type="checkbox" value="summer" onClick="setCheckBoxAsRadio(season, this);" v-model="season" />
+                <input type="checkbox" value="summer"  v-model="season" />
                 <label for="summer">여름</label>
                 <br />
-                <input type="checkbox" value="autumn" onClick="setCheckBoxAsRadio(season, this);" v-model="season" />
+                <input type="checkbox" value="autumn"  v-model="season" />
                 <label for="autumn">가을</label>
                 <br />
-                <input type="checkbox" value="winter" onClick="setCheckBoxAsRadio(season, this);" v-model="season" />
+                <input type="checkbox" value="winter"  v-model="season" />
                 <label for="winter">겨울</label>
               </div>
               <label class="title">|시간별</label>
@@ -152,19 +152,27 @@ export default {
 @import "@/styles/common.scss";
 
 #ProdListViewRoot {
+  width: 100%;
+  height: 200%;
   font-family: $kor-font-family;
-  color: $black-color;
+  // color: $black-color;
+  position: absolute;
 }
 .filter-box {
+  top: 28%;
   width: 20%;
-  height: 79%;   
+  height: 79%;
+  z-index: -1;
+  position: relative;     
   float: left;
   font-family: $kor-font-family;
   background-color: white;;
 }
 .filter-box .inner-box {
-  width: 40%;  
-  height: 70%;  
+  top: 10%;
+  width: 20%;
+  height: 79%;
+  z-index: -1;
   margin-top: 10%;
   margin-left: 25%;
 }

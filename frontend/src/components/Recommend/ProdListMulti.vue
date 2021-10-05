@@ -2,7 +2,7 @@
 <template>
     <div id="ProdOneRoot">
         <div class="perfume-page">
-            <div class="perfume-container"> 
+            <div class="perfume-container">            
                 <div class="accord-filter">
                     <div>ALL</div>
                     <a>ALL | </a>
@@ -31,9 +31,9 @@
                             다음
                     </button>
                 </div>
-                </div>                   
             </div>  
-        </div>      
+        </div> 
+        </div>              
     </div>    
 </template>
 
@@ -86,18 +86,20 @@ export default {
 @import "@/styles/common.scss";
 .perfume-page{
     width: 100%;
-    height: 1100px;
+    height: 100vh;
     font-family: $kor-font-family;
     padding: 30px;
-    margin: 10px 350px 10px 250px;  
+    margin: 50px 350px 10px 250px;  
     background-color: #f8f4f4;
 }
 .perfume-container{
-    width: 1100px;
-    height: 100%;
+    width: 65%;
+    height: 80vh;
+    top: 30%;
+    position: absolute;
     font-family: $kor-font-family;
     padding: 30px;
-    margin: 10px 200px 10px 150px;  
+    margin: 10px 200px 10px 130px;  
     background-color: #f8f4f4;
 }
 // .perfume-list{
@@ -108,8 +110,8 @@ export default {
 // }
 .card{
     float: left;
-    width:160px;
-    height: 300px;
+    width: 15%;
+    height: 40vh;
     margin: 20px;
     padding: 10px;
     font-family: $kor-font-family;
