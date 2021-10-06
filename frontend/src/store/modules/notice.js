@@ -14,7 +14,7 @@ export default {
       console.log("공지사항 목록들 디스패치");
       
       axios
-        .get("http://localhost:8888/suscent/api/notices/") // user_id, password
+        .get("http://j5c204.p.ssafy.io/suscent/api/notices/") // user_id, password
         .then((res) => {
           console.log("res");
           // console.log(res);
