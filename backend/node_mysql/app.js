@@ -121,25 +121,48 @@ app.post("/suscent/api/login/", (req, res) => {
     console.log(req)
     console.log(req.body)
     console.log(req.body.user_id)
-    connection.query('SELECT * FROM user', function(err, rows) {
-        if(err) throw err;
-        console.log('res')
-        connection.query('SELECT * FROM user WHERE user_id = ? AND password = ?', [req.body.user_id, req.body.password], function(error, results, fields) {
-          if (results.length == 0) {
-            console.log('로그인실패띠')
-          } else {
+    
+    connection.query('SELECT * FROM user WHERE user_id = ? AND password = ?',
+                    [req.body.user_id, req.body.password],
+                    function(error, results, fields) {
+                      if(error) throw error;
+      if (results.length == 0) {
+        console.log('로그인실패띠')
+        res.send({
+          "code": 404,
+          "success": "not found user"
+        });
+      } else {
 
-            console.log('The solution is: ', results);
-            
-            res.send({
-                "code": 200,
-                "user_id": results[0].user_id,
-                "success": "user login sucessfully"
-            });
-          }
-        })
+        console.log('The solution is: ', results);
+        
+        res.send({
+          "code": 200,
+          "user_id": results[0].user_id,
+          "success": "user login sucessfully"
+        });
+      }
     })
 })
+
+// connection.query('SELECT * FROM user', function(err, rows) {
+    //     if(err) throw err;
+    //     console.log('res')
+    //     connection.query('SELECT * FROM user WHERE user_id = ? AND password = ?', [req.body.user_id, req.body.password], function(error, results, fields) {
+    //       if (results.length == 0) {
+    //         console.log('로그인실패띠')
+    //       } else {
+
+    //         console.log('The solution is: ', results);
+            
+    //         res.send({
+    //             "code": 200,
+    //             "user_id": results[0].user_id,
+    //             "success": "user login sucessfully"
+    //         });
+    //       }
+    //     })
+    // })
 app.get("/suscent/api/notice/:id", (req, res) => {
     console.log('notice')
     // console.log(req.params)
