@@ -108,7 +108,7 @@ export default {
       .then((res) => {
         // console.log(res);
         console.log("목록 소환 성공");
-        // this.notices = res.data;
+        this.notices = res.data;
         console.log(this.notices);
       })
       .catch(() => {
